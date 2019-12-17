@@ -31,7 +31,7 @@ public class ProviderMapperTest {
             //3 创建sqlSession
             sqlSession = factory.openSession();
             //4 调用mapper文件来对数据进行操作，必须先把mapper文件引入到mybatis-config.xml中
-            count = sqlSession.selectOne("cn.smbms.dao.provider.ProviderMapper.countProvider");
+            count = sqlSession.selectOne("mymapper.countProvider");
             logger.debug("ProviderMapperTest count---> " + count);
         } catch (IOException e) {
             // TODO Auto-generated catch block
