@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- 通过这个配置文件完成mybatis与数据库的连接 -->
+<configuration>
+    <!-- 引入 database.properties 文件-->
+    <!-- <properties resource="database.properties"/> -->
+
+    <!-- <properties>
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/mysmbms"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123"/>
+    </properties> -->
+
+    <properties resource="database.properties">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/mysmbms"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123"/>
+    </properties>
+
+    <!-- 配置mybatis的log实现为LOG4J -->
+    <settings>
+        <setting name="logImpl" value="LOG4J" />
+    </settings>
+    <typeAliases>
+        <!-- <typeAlias alias="Provider" type="cn.smbms.pojo.Provider"/> -->
+        <package name="cn.smbms.pojo"/>
+    </typeAliases>
+    <environments default="test">
+        <environment id="development">
+            <!--配置事务管理，采用JDBC的事务管理  -->
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- POOLED:mybatis自带的数据源，JNDI:基于tomcat的数据源 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${user}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+        <environment id="test">
+            <!--配置事务管理，采用JDBC的事务管理  -->
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- POOLED:mybatis自带的数据源，JNDI:基于tomcat的数据源 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!--<property name="url" value="jdbc:mysql://10.0.0.122:3306/test"/>-->
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mysmbms"/>
+                <property name="username" value="root"/>
+                <!--<property name="password" value="test"/>-->
+                <property name="password" value="123"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 将mapper文件加入到配置文件中 -->
+    <mappers>
+         <!--<mapper resource="cn/smbms/dao/provider/ProviderMapper.xml"/>-->
+        <mapper url="file:///Users/yanguobin/IdeaProjects/mysmbms/SMBMS_C01HO_03/src/main/java/cn/smbms/dao/provider/ProviderMapper.xml"/>
+        <!-- file:后面至少要跟两个杠 -->
+    </mappers>
+
+</configuration>
+
